@@ -37,23 +37,23 @@ Para evaluar la estructura espacial, se calculan:
 - **Sumas por filas y columnas:** Indicadores de la distribución de estados.
 - **Promedio de vecinos (vecindad de Moore):** Para cada celda se calcula el promedio de los 8 vecinos.
 - **Coeficiente de correlación de Pearson:**  
-  $$
-  r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2 \sum (y_i - \bar{y})^2}}
-  $$
+  <img src="https://latex.codecogs.com/svg.image?r=\frac{\sum(x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\sum(x_i-\bar{x})^2\sum(y_i-\bar{y})^2}}" alt="Coeficiente de correlación de Pearson" />
+  
   donde \( x_i \) es el valor de la celda y \( y_i \) el promedio de sus vecinos. Los análisis arrojaron un coeficiente moderado, indicando que la distribución no es aleatoria.
 
 #### 2. Transformada de Fourier (FFT)
 
 La FFT se utiliza para detectar periodicidades en las sumas por filas y columnas. La transformada se define como:
-$$
-X(k) = \sum_{n=0}^{N-1} x(n)\, e^{-i\, 2\pi \frac{k\, n}{N}}
-$$
+  
+  <img src="https://latex.codecogs.com/svg.image?X(k)=\sum_{n=0}^{N-1}x(n)\,e^{-i\,2\pi\frac{k\,n}{N}}" alt="Transformada de Fourier (FFT)" />
+  
 Esta herramienta permite identificar posibles ciclos o patrones repetitivos que, en una hipótesis astronómica, podrían relacionarse con ciclos temporales (por ejemplo, lunar o solar). En este caso, aunque se han calculado y graficado los espectros, no se detectaron picos de periodicidad claramente marcados.
 
 #### 3. Reducción de Dimensionalidad: PCA y t-SNE
 
 - **PCA (Análisis de Componentes Principales):**  
   Se emplea para reducir la dimensionalidad del conjunto de datos y extraer las direcciones de mayor varianza. El método transforma el conjunto de datos \( X \) en un conjunto de componentes \( Z \) mediante la matriz de covarianza.
+  
 - **t-SNE:**  
   Técnica no lineal de reducción de dimensionalidad que permite visualizar agrupamientos latentes en datos de alta dimensión. Dada la escasez de muestras (por ejemplo, 8 filas), se ajustaron parámetros como el _perplexity_ para obtener visualizaciones coherentes.
 
@@ -62,10 +62,18 @@ Ambas técnicas han evidenciado agrupaciones latentes en la distribución de los
 #### 4. Clustering Difuso: Fuzzy C-means
 
 El clustering difuso permite que cada celda tenga grados de pertenencia a distintos clusters. El algoritmo Fuzzy C-means minimiza la función objetivo:
-$$
-J_m = \sum_{i=1}^{N} \sum_{j=1}^{C} u_{ij}^m \| x_i - c_j \|^2
-$$
+  
+  <img src="https://latex.codecogs.com/svg.image?J_m=\sum_{i=1}^{N}\sum_{j=1}^{C}u_{ij}^m\|x_i-c_j\|^2" alt="Función objetivo del Clustering Difuso (Fuzzy C-means)" />
+  
 donde \( u_{ij} \) es el grado de pertenencia de la muestra \( x_i \) al cluster \( j \), \( c_j \) es el centro del cluster y \( m \) es el coeficiente de fuzzificación. El Fuzzy Partition Coefficient (FPC) se utiliza para evaluar la calidad de la partición; valores cercanos a 1 indican una partición nítida. En el análisis, se obtuvo un FPC de aproximadamente 0.70 para \( k=2 \), lo que sugiere una división robusta en dos bloques.
+
+#### 5. (Opcional) Transformación PCA Básica
+
+Para una representación simplificada de la transformación PCA se puede usar:
+
+<img src="https://latex.codecogs.com/svg.image?Z=XW" alt="Transformación PCA básica" />
+
+donde \( W \) son los vectores propios de la matriz de covarianza de \( X \).
 
 ### Orientación de Lectura
 
@@ -97,4 +105,4 @@ Los análisis realizados indican que la Piedra de Cerro Macareno presenta una or
 - **Transformada de Fourier:** Proceso matemático para analizar la frecuencia de señales (ver: Bracewell, R. N. *The Fourier Transform and Its Applications*).
 - **PCA:** Jolliffe, I. *Principal Component Analysis*.
 - **t-SNE:** van der Maaten, L., & Hinton, G. *Visualizing Data using t-SNE*.
-- **Fuzzy C-means:** Bezdek, J. C. *Pattern Recognition with Fuzzy Objective Function Algorithms*.
+- **Fuzzy C-means:** Bezdek, J. C.
