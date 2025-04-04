@@ -1,4 +1,4 @@
-# Análisis estadístico y de inteligencia artificial de la Tableta de Cerro Macareno
+# Análisis estadístico y de Inteligencia Artificial de la Tableta de Cerro Macareno
 
 **Autor:** Pablo Beret Grande (abril 2025)  
 
@@ -61,51 +61,36 @@ Se evaluó la estructura espacial calculando:
 - **Sumas por filas y columnas:** Permiten detectar concentraciones de trazos verticales u horizontales.
 - **Promedio de vecinos (vecindad de Moore):** Para cada celda se calcula el promedio de sus 8 vecinos en una vecindad 3×3.
 - **Coeficiente de correlación de Pearson:**  
-  \[
-  r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2 \sum (y_i - \bar{y})^2}}
-  \]
-  donde \(x_i\) es el valor de la celda y \(y_i\) el promedio de sus vecinos. Un \(r\) moderado o alto indica que celdas con valores similares tienden a agruparse.
+  <img src="https://latex.codecogs.com/svg.image?r=\frac{\sum(x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\sum(x_i-\bar{x})^2\sum(y_i-\bar{y})^2}}" alt="Coeficiente de correlación de Pearson" />
 
 #### 2.2 Transformada de Fourier (FFT)
 
 La FFT se aplicó a las sumas por filas y columnas para detectar periodicidades en la distribución. La transformada se define como:
 
-\[
-X(k)=\sum_{n=0}^{N-1}x(n)\,e^{-i\,2\pi\frac{k\,n}{N}}
-\]
-
-Esta técnica permite identificar posibles ciclos o patrones repetitivos, que en una hipótesis astronómica podrían relacionarse con fenómenos cíclicos.
+<img src="https://latex.codecogs.com/svg.image?X(k)=\sum_{n=0}^{N-1}x(n)\,e^{-i\,2\pi\frac{k\,n}{N}}" alt="Transformada de Fourier (FFT)" />
 
 #### 2.3 Reducción de Dimensionalidad: PCA y t-SNE
 
 - **PCA (Análisis de Componentes Principales):**  
-  Se emplea para reducir la dimensionalidad del conjunto de datos y extraer las direcciones de mayor varianza.
-  
+  Se emplea para reducir la dimensionalidad del conjunto de datos y extraer las direcciones de mayor varianza. La transformación básica es:  
+  <img src="https://latex.codecogs.com/svg.image?Z=XW" alt="Transformación PCA" />  
+  donde \(W\) son los vectores propios de la matriz de covarianza de \(X\).
+
 - **t-SNE:**  
-  Técnica no lineal que permite visualizar agrupamientos latentes en datos de alta dimensión. Se ajustaron parámetros (por ejemplo, el _perplexity_) para obtener visualizaciones coherentes, especialmente en muestras pequeñas.
+  Técnica no lineal que permite visualizar agrupamientos latentes en datos de alta dimensión.
 
 #### 2.4 Clustering Difuso (Fuzzy C-means)
 
-El algoritmo Fuzzy C-means permite que cada celda tenga un grado de pertenencia a cada clúster. El método minimiza la siguiente función objetivo:
+El algoritmo Fuzzy C-means minimiza la función objetivo:  
+<img src="https://latex.codecogs.com/svg.image?J_m=\sum_{i=1}^{N}\sum_{j=1}^{C}u_{ij}^m\|x_i-c_j\|^2" alt="Función objetivo del Clustering Difuso (Fuzzy C-means)" />
 
-\[
-J_m=\sum_{i=1}^{N}\sum_{j=1}^{C}u_{ij}^m \, \|x_i-c_j\|^2
-\]
-
-donde:
-- \(u_{ij}\) es el grado de pertenencia de la muestra \(x_i\) al clúster \(j\),
-- \(c_j\) es el centro del clúster,
-- \(m\) es el coeficiente de fuzzificación.
-
-Se utiliza el Fuzzy Partition Coefficient (FPC) para evaluar la calidad de la partición, siendo valores cercanos a 1 indicativos de una partición nítida.
+donde \(u_{ij}\) es el grado de pertenencia de \(x_i\) al clúster \(j\), \(c_j\) es el centro del clúster, y \(m\) es el coeficiente de fuzzificación.
 
 #### 2.5 Orientación Horizontal vs. Orientación Vertical
 
 Para evaluar si la orientación de lectura altera los resultados, se repitieron los análisis en:
 - **Orientación Horizontal:** Matriz en su forma original.  
-- **Orientación Vertical:** Matriz traspuesta (lo que equivale a "rotar" la tablilla 90º).
-
-Se mantuvieron los mismos códigos (1 para "vertical", 3 para "horizontal" y 5 para "vacío") para facilitar la comparación.
+- **Orientación Vertical:** Matriz traspuesta (equivalente a "rotar" la tablilla 90º).
 
 ---
 
@@ -117,97 +102,46 @@ Se mantuvieron los mismos códigos (1 para "vertical", 3 para "horizontal" y 5 p
    - Media: ~2.39  
    - Mediana: 3.00  
    - Desviación estándar: ~1.10  
-   
-   Estos valores, junto con el histograma de frecuencias, sugieren dos agrupaciones (valores próximos a 1 y valores cercanos a 3).
 
 2. **Autocorrelación y FFT:**  
-   - Se detectan diferencias en las sumas por filas y columnas, lo que indica bloques diferenciados.  
-   - La FFT no muestra picos de periodicidad astronómica claramente definidos, pero revela patrones de distribución.
-   
    ![Espectro FFT de filas (Horizontal)](/data/fft_filas_horizontal.PNG)
    ![Espectro FFT de columnas (Horizontal)](/data/fft_columnas_horizontal.PNG)
 
-3. **Reducción de Dimensionalidad (PCA y t-SNE):**  
-   - **PCA (Horizontal):** Muestra cierta dispersión con indicios de dos agrupaciones, aunque no tan definidas.  
-   - **t-SNE (Horizontal):** Evidencia grupos más claros, con algunos puntos intermedios.
-   
+3. **Reducción de Dimensionalidad:**  
    ![PCA de la tabla (Horizontal)](/data/pca_horizontal.PNG)
    ![t-SNE de la tabla (Horizontal)](/data/tsne_horizontal.PNG)
 
-4. **Clustering Difuso (Fuzzy C-means, k=2):**  
-   - Se obtuvo un FPC de aproximadamente 0.65–0.70, lo que sugiere una partición robusta en dos clústeres.
-   
+4. **Clustering Difuso:**  
    ![Clusters (Fuzzy C-means) para k=2 (Horizontal)](/data/fuzzy_horizontal.PNG)
-
-**Conclusiones de la Orientación Horizontal:**  
-Los datos se agrupan en dos bloques diferenciados (1 y 3) de forma consistente, validando la propuesta de un modelo "binario" (más el estado 5 para los vacíos). Aunque la FFT no muestra periodicidades astronómicas evidentes, la presencia de patrones espaciales y la robustez del clustering refuerzan la hipótesis de una estructura intencional.
 
 ---
 
 ### 3.2 Orientación Vertical
 
-Para simular la lectura "vertical" de la tablilla se transpuso la matriz. Esto implica que las filas y columnas intercambian rol, lo que a veces invierte la interpretación de "vertical" y "horizontal", pero se mantienen los mismos códigos (1, 3 y 5).
-
-1. **Estadísticas Descriptivas (excluyendo vacíos):**  
-   Se observa que la distribución sigue mostrando dos modos, similar a la orientación horizontal.
-
-2. **Autocorrelación y FFT (Vertical):**  
-   - Se repiten los cálculos de sumas por filas y columnas y se aplica la FFT.  
-   - Los resultados son similares: no se aprecian picos claros de periodicidad, pero se confirman patrones de distribución.
-   
+1. **FFT (Vertical):**  
    ![Espectro FFT de filas (Vertical)](/data/fft_filas_vertical.PNG)
    ![Espectro FFT de columnas (Vertical)](/data/fft_columnas_vertical.PNG)
 
-3. **Reducción de Dimensionalidad (PCA y t-SNE):**  
-   - **PCA (Vertical):** Muestra dos tendencias, aunque la separación puede variar según la varianza acumulada.
-   - **t-SNE (Vertical):** En algunos casos se observa una agrupación casi perfecta en dos bloques, lo que podría sugerir que la lectura vertical (o la transposición) resalta de forma más clara la segmentación.
-   
+2. **Reducción de Dimensionalidad:**  
    ![PCA de la tabla (Vertical)](/data/pca_vertical.PNG)
    ![t-SNE de la tabla (Vertical)](/data/tsne_vertical.PNG)
 
-4. **Clustering Difuso (Fuzzy C-means, k=2):**  
-   - El FPC (~0.65) es similar al obtenido en orientación horizontal, confirmando una partición robusta en dos grupos.
-   
+3. **Clustering Difuso:**  
    ![Clusters (Fuzzy C-means) para k=2 (Vertical)](/data/fuzzy_vertical.PNG)
-
-**Conclusiones de la Orientación Vertical:**  
-Los análisis confirman la persistencia de una estructura bimodal incluso al transponer la matriz. La agrupación casi perfecta en t-SNE en algunos ensayos podría sugerir que la lectura vertical revela una segmentación más clara, o bien, ofrece una visión complementaria a la orientación horizontal. En cualquier caso, los métodos indican que la organización interna de la tablilla es robusta y no depende de la dirección de lectura.
 
 ---
 
 ## Conclusiones Generales
 
-1. **Validez del Modelo Trinario (1, 3, 5):**  
-   La transformación a un modelo simplificado de tres estados (1 = vertical, 3 = horizontal, 5 = vacío) facilita el análisis y revela una estructura fundamentalmente bimodal.
-
-2. **Orientación Horizontal vs. Vertical:**  
-   - Ambos enfoques arrojan resultados coherentes: la tablilla presenta dos grupos claramente diferenciados.  
-   - En la orientación vertical, algunas técnicas (como t‑SNE) muestran una separación más nítida, lo que podría indicar que la lectura vertical se ajusta mejor a la organización original o, al menos, ofrece una visión complementaria.
-
-3. **Patrones Espaciales y FFT:**  
-   - Aunque no se detectaron periodicidades astronómicas claras, los picos moderados en la FFT y el análisis de autocorrelación evidencian que la distribución de trazos no es aleatoria.
-   - El coeficiente de correlación de Pearson y las sumas por filas y columnas refuerzan la existencia de bloques diferenciados.
-
-4. **Reducción de Dimensionalidad (PCA y t-SNE):**  
-   - La PCA sugiere la existencia de dos direcciones principales de variabilidad.  
-   - El t-SNE evidencia de forma más clara la división en dos grupos, especialmente en la orientación vertical en ciertos ensayos.
-
-5. **Clustering Difuso (Fuzzy C-means):**  
-   - Con \( k=2 \), se obtiene un FPC cercano a 0.65–0.70, indicando una partición estable en dos clústeres.  
-   - Este hallazgo se mantiene en ambas orientaciones, reforzando la hipótesis de una estructura bimodal.
-
-**Perspectivas Futuras:**  
-- Integrar información contextual adicional (por ejemplo, correlaciones con ciclos lunares o solares) para evaluar si la disposición de las marcas responde a motivos astronómicos.  
-- Explorar metodologías avanzadas (como redes neuronales convolucionales) que consideren la distribución espacial completa.  
-- Investigar la posibilidad de más de dos estados relevantes en función de características adicionales de las marcas.
+Los análisis confirman una estructura bimodal robusta independiente de la orientación. Las técnicas de IA y estadística refuerzan la hipótesis de un registro no aleatorio, posiblemente vinculado a fenómenos espaciales o temporales.
 
 ---
 
 ## Referencias
 
-- **Bracewell, R. N.** *The Fourier Transform and Its Applications*. McGraw-Hill.  
-- **Jolliffe, I.** *Principal Component Analysis*. Springer.  
-- **van der Maaten, L., & Hinton, G.** (2008). *Visualizing Data using t-SNE*. Journal of Machine Learning Research, 9.  
-- **Bezdek, J. C.** *Pattern Recognition with Fuzzy Objective Function Algorithms*. Springer.  
+- **Bracewell, R. N.** *The Fourier Transform and Its Applications*.  
+- **Jolliffe, I.** *Principal Component Analysis*.  
+- **van der Maaten, L., & Hinton, G.** *Visualizing Data using t-SNE*.  
+- **Bezdek, J. C.** *Pattern Recognition with Fuzzy Objective Function Algorithms*.
 
 ---
