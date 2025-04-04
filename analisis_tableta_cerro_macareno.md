@@ -1,4 +1,4 @@
-# Análisis estadístico y de Inteligencia Artificial de la Tableta de Cerro Macareno
+# Análisis estadístico y con métodos de inteligencia artificial de la Tableta de Cerro Macareno
 
 **Autor:** Pablo Beret Grande (abril 2025)  
 
@@ -30,7 +30,7 @@ Con el fin de investigar si la orientación de lectura (horizontal o vertical) a
 
 ---
 
-## Historia y Contexto
+## Historia y contexto
 
 La Tableta fue hallada en el yacimiento del Cerro Macareno, en la provincia de Sevilla, y ha suscitado diversas interpretaciones: desde un registro de sucesos hasta un proto-sistema de escritura. Ante la ausencia de un corpus comparativo amplio, este estudio se centra en analizar la distribución de las marcas para:
 
@@ -42,7 +42,7 @@ La Tableta fue hallada en el yacimiento del Cerro Macareno, en la provincia de S
 
 ## Metodología
 
-### 1. Transcripción y Codificación de Datos
+### 1. Transcripción y codificación de datos
 
 Inicialmente se identificaron múltiples categorías en las marcas (1, 1.5, 2, 3, 3.5, 4 y 5). Para el análisis se simplificó el sistema a un modelo de tres estados:
 
@@ -54,9 +54,9 @@ A continuación se muestra un ejemplo del DataFrame original (orientación horiz
 
 ![DataFrame original (orientación horizontal)](/data/dataframe_original_horizontal.PNG)
 
-### 2. Análisis Estadísticos y de IA Aplicados
+### 2. Análisis estadísticos y de IA aplicados
 
-#### 2.1 Autocorrelación Espacial
+#### 2.1 Autocorrelación espacial
 
 Se evaluó la estructura espacial calculando:
 
@@ -71,7 +71,7 @@ La FFT se aplicó a las sumas por filas y columnas para detectar periodicidades 
 
 <img src="https://latex.codecogs.com/svg.image?X(k)=\sum_{n=0}^{N-1}x(n)\,e^{-i\,2\pi\frac{k\,n}{N}}" alt="Transformada de Fourier (FFT)" />
 
-#### 2.3 Reducción de Dimensionalidad: PCA y t-SNE
+#### 2.3 Reducción de dimensionalidad: PCA y t-SNE
 
 - **PCA (Análisis de Componentes Principales):**  
   Se emplea para reducir la dimensionalidad del conjunto de datos y extraer las direcciones de mayor varianza. La transformación básica es:  
@@ -81,26 +81,26 @@ La FFT se aplicó a las sumas por filas y columnas para detectar periodicidades 
 - **t-SNE:**  
   Técnica no lineal que permite visualizar agrupamientos latentes en datos de alta dimensión.
 
-#### 2.4 Clustering Difuso (Fuzzy C-means)
+#### 2.4 Clustering difuso (Fuzzy C-means)
 
 El algoritmo Fuzzy C-means minimiza la función objetivo:  
 <img src="https://latex.codecogs.com/svg.image?J_m=\sum_{i=1}^{N}\sum_{j=1}^{C}u_{ij}^m\|x_i-c_j\|^2" alt="Función objetivo del Clustering Difuso (Fuzzy C-means)" />
 
 donde \(u_{ij}\) es el grado de pertenencia de \(x_i\) al clúster \(j\), \(c_j\) es el centro del clúster, y \(m\) es el coeficiente de fuzzificación.
 
-#### 2.5 Orientación Horizontal vs. Orientación Vertical
+#### 2.5 Orientación horizontal vs. Orientación vertical
 
 Para evaluar si la orientación de lectura altera los resultados, se repitieron los análisis en:
-- **Orientación Horizontal:** Matriz en su forma original.  
-- **Orientación Vertical:** Matriz traspuesta (equivalente a "rotar" la tablilla 90º).
+- **Orientación horizontal:** Matriz en su forma original.  
+- **Orientación vertical:** Matriz traspuesta (equivalente a "rotar" la tablilla 90º).
 
 ---
 
 ## Resultados
 
-### 3.1 Orientación Horizontal
+### 3.1 Orientación horizontal
 
-1. **Estadísticas Descriptivas (excluyendo vacíos):**  
+1. **Estadísticas descriptivas (excluyendo vacíos):**  
    - Media: ~2.39  
    - Mediana: 3.00  
    - Desviación estándar: ~1.10  
@@ -109,31 +109,31 @@ Para evaluar si la orientación de lectura altera los resultados, se repitieron 
    ![Espectro FFT de filas (Horizontal)](/data/fft_filas_horizontal.PNG)
    ![Espectro FFT de columnas (Horizontal)](/data/fft_columnas_horizontal.PNG)
 
-3. **Reducción de Dimensionalidad:**  
+3. **Reducción de dimensionalidad:**  
    ![PCA de la tabla (Horizontal)](/data/pca_horizontal.PNG)
    ![t-SNE de la tabla (Horizontal)](/data/tsne_horizontal.PNG)
 
-4. **Clustering Difuso:**  
+4. **Clustering difuso:**  
    ![Clusters (Fuzzy C-means) para k=2 (Horizontal)](/data/fuzzy_horizontal.PNG)
 
 ---
 
-### 3.2 Orientación Vertical
+### 3.2 Orientación vertical
 
 1. **FFT (Vertical):**  
    ![Espectro FFT de filas (Vertical)](/data/fft_filas_vertical.PNG)
    ![Espectro FFT de columnas (Vertical)](/data/fft_columnas_vertical.PNG)
 
-2. **Reducción de Dimensionalidad:**  
+2. **Reducción de dimensionalidad:**  
    ![PCA de la tabla (Vertical)](/data/pca_vertical.PNG)
    ![t-SNE de la tabla (Vertical)](/data/tsne_vertical.PNG)
 
-3. **Clustering Difuso:**  
+3. **Clustering difuso:**  
    ![Clusters (Fuzzy C-means) para k=2 (Vertical)](/data/fuzzy_vertical.PNG)
 
 ---
 
-## Conclusiones Generales
+## Conclusiones generales
 
 Los análisis confirman una estructura bimodal robusta independiente de la orientación. Las técnicas de IA y estadística refuerzan la hipótesis de un registro no aleatorio, posiblemente vinculado a fenómenos espaciales o temporales.
 
