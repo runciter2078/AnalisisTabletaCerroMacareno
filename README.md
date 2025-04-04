@@ -1,15 +1,15 @@
-# Análisis estadístico y de inteligencia artificial aplicado a la Piedra de Cerro Macareno
+# Análisis estadístico y de inteligencia artificial aplicado a la tableta de Cerro Macareno
 
-Este repositorio contiene el análisis estadístico y de inteligencia artificial aplicado a la Piedra de Cerro Macareno. Se utiliza un cuaderno Jupyter (`analisis.ipynb`) que integra técnicas de correlación espacial, transformada de Fourier (FFT), reducción de dimensionalidad (PCA y t-SNE) y clustering difuso (Fuzzy C-means) para explorar la organización de las marcas de la tablilla.
+Este repositorio contiene el análisis estadístico y de inteligencia artificial aplicado a la tableta de Cerro Macareno. Se utiliza un cuaderno Jupyter (`analisis.ipynb`) que integra técnicas de correlación espacial, transformada de Fourier (FFT), reducción de dimensionalidad (PCA y t-SNE) y clustering difuso (Fuzzy C-means) para explorar la organización de las marcas de la tablilla.
 
 ## Descripción
 
-El estudio se basa en la transcripción de las marcas de la piedra, inicialmente codificadas en múltiples estados (vertical, horizontal, inclinaciones, etc.) y posteriormente simplificadas a un modelo binario (vertical vs. horizontal). Se analizan los datos en ambas orientaciones (horizontal y vertical) para evaluar la robustez de la estructura y la posibilidad de que la piedra registre información espacial o temporal, con hipótesis de origen arqueoastronómico.
+El estudio se basa en la transcripción de las marcas de la tableta, inicialmente codificadas en múltiples estados (vertical, horizontal, inclinaciones, etc.) y posteriormente simplificadas a un modelo binario (vertical vs. horizontal). Se analizan los datos en ambas orientaciones (horizontal y vertical) para evaluar la robustez de la estructura y la posibilidad de que la tableta registre información espacial o temporal, con hipótesis de origen arqueoastronómico.
 
 ## Estructura del Repositorio
 
 - `analisis.ipynb`: Cuaderno Jupyter con el código completo del análisis.
-- `documentacion_analisis_piedra_cerro_macareno.md`: Documento con la metodología, teoría, resultados y conclusiones.
+- `documentacion_analisis_tableta_cerro_macareno.md`: Documento con la metodología, teoría, resultados y conclusiones.
 - `data/`: Carpeta que contiene la imagen de la tablilla (`tablilla.jpg`) y, en el futuro, imágenes de las salidas del cuaderno.
 - `requirements.txt`: Lista de dependencias necesarias (pandas, numpy, matplotlib, seaborn, scikit-learn, scikit-fuzzy, etc.).
 
@@ -17,7 +17,7 @@ El estudio se basa en la transcripción de las marcas de la piedra, inicialmente
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/runciter2078/AnalisisPiedraCerroMacareno.git
+   git clone https://github.com/runciter2078/AnalisistabletaCerroMacareno.git
    ```
 2. Instala las dependencias:
    ```bash
