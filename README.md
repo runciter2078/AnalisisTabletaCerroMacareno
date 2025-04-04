@@ -1,4 +1,4 @@
-# Análisis estadístico y de inteligencia artificial aplicado a la tableta de Cerro Macareno
+# Análisis estadístico y de inteligencia artificial aplicado a la Tableta de Cerro Macareno
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -19,7 +19,7 @@ El estudio se basa en la transcripción de las marcas de la tableta, inicialment
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/runciter2078/AnalisistabletaCerroMacareno.git
+   git clone https://github.com/runciter2078/AnalisisTabletaCerroMacareno.git
    ```
 2. Instala las dependencias:
    ```bash
