@@ -1,12 +1,12 @@
 # Análisis estadístico y de Inteligencia Artificial de la Tableta de Cerro Macareno
 
-**Autor:** Pablo Beret Grande (abril 2025)
+**Autor:** Pablo Beret Grande (abril 2025)  
 
 ---
 
 ## Resumen
 
-Este estudio analiza la Tableta de Cerro Macareno mediante técnicas estadísticas e inteligencia artificial. Se transcribieron las marcas de la tablilla, originalmente codificadas en múltiples estados, y se simplificaron a un modelo que conserva tres estados: **vertical**, **horizontal** y **vacío**. Se aplicaron métodos de autocorrelación espacial, transformada de Fourier (FFT), reducción de dimensionalidad (PCA y t-SNE) y clustering difuso (Fuzzy C-means) para explorar la estructura subyacente y evaluar la influencia de la orientación de lectura.
+Este estudio analiza la Tableta de Cerro Macareno mediante técnicas estadísticas e inteligencia artificial. Se transcribieron las marcas de la tablilla, originalmente codificadas en múltiples estados, y se simplificaron a un modelo que conserva tres estados: **vertical**, **horizontal** y **vacío**. Se aplicaron métodos de autocorrelación espacial, transformada de Fourier (FFT), reducción de dimensionalidad (PCA y t-SNE) y clustering difuso (Fuzzy C-means) para explorar la estructura subyacente y evaluar la influencia de la orientación de lectura (horizontal vs. vertical).
 
 **Palabras clave:** Tableta de Cerro Macareno, análisis estadístico, inteligencia artificial, autocorrelación espacial, FFT, PCA, t-SNE, clustering difuso, arqueología, patrones astronómicos.
 
@@ -14,7 +14,7 @@ Este estudio analiza la Tableta de Cerro Macareno mediante técnicas estadístic
 
 ## Abstract
 
-This study analyzes the Tableta de Cerro Macareno using statistical and artificial intelligence techniques. The tablet markings, originally encoded in multiple states, are simplified to a model that preserves three states: vertical, horizontal, and blank. Spatial autocorrelation, Fourier transform (FFT), dimensionality reduction (PCA and t-SNE), and fuzzy clustering (Fuzzy C-means) methods are applied to explore the underlying structure and assess the impact of reading orientation.
+This study analyzes the Tableta de Cerro Macareno using statistical and artificial intelligence techniques. The tablet markings, originally encoded in multiple states, are simplified to a model that preserves three states: vertical, horizontal, and blank. Spatial autocorrelation, Fourier transform (FFT), dimensionality reduction (PCA and t-SNE), and fuzzy clustering (Fuzzy C-means) methods are applied to explore the underlying structure and assess the impact of reading orientation (horizontal vs. vertical).
 
 **Key Words:** Tableta de Cerro Macareno, statistical analysis, artificial intelligence, spatial autocorrelation, FFT, PCA, t-SNE, fuzzy clustering, archaeology, astronomical patterns.
 
@@ -22,176 +22,192 @@ This study analyzes the Tableta de Cerro Macareno using statistical and artifici
 
 ## Introducción
 
-La Tableta de Cerro Macareno es un artefacto arqueológico cuya función y significado han generado múltiples hipótesis. En este estudio se transcribieron las marcas de la tablilla, inicialmente codificadas en varios estados (vertical, horizontal, inclinaciones a la derecha e izquierda, etc.), y se aplicaron técnicas estadísticas y de inteligencia artificial para determinar la estructura subyacente. Los análisis revelaron que, para fines prácticos, el sistema se comporta de forma binaria (vertical vs. horizontal), manteniéndose la categoría de casillas en blanco. Además, se evaluó la influencia de la orientación de lectura (horizontal vs. vertical) mediante métodos de autocorrelación espacial, FFT, PCA, t-SNE y clustering difuso.
+La Tableta de Cerro Macareno es un artefacto arqueológico cuya función y significado han generado múltiples hipótesis. En este estudio se transcribieron las marcas de la tablilla, inicialmente codificadas en varios estados (vertical, horizontal, inclinaciones a la derecha e izquierda, etc.), y se aplicaron técnicas estadísticas e inteligencia artificial para determinar la estructura subyacente. Los análisis preliminares revelaron que, para fines prácticos, el sistema se comporta de forma binaria (vertical vs. horizontal), manteniéndose un tercer estado para las casillas en blanco.  
+
+Con el fin de investigar si la orientación de lectura (horizontal o vertical) afecta a la interpretación, se llevaron a cabo los mismos análisis en dos versiones de la matriz de datos: la original (asumida como "horizontal") y su traspuesta (denominada "vertical"). A continuación, se describen los métodos empleados y los resultados obtenidos, incluyendo las conclusiones derivadas de ambos enfoques.
 
 ---
 
 ## Historia y Contexto
 
-La Tableta fue hallada en el yacimiento del Cerro Macareno, en la provincia de Sevilla, y ha suscitado debate sobre su función. Diversas interpretaciones sugieren que podría tratarse de un registro de sucesos, un inventario o incluso un proto-sistema de escritura. Ante la ausencia de un corpus comparativo amplio, este estudio se centra en analizar la distribución de las marcas para evaluar si existe una organización intencional y, potencialmente, si se asocia a patrones de origen astronómico o a registros de fenómenos temporales y espaciales.
+La Tableta fue hallada en el yacimiento del Cerro Macareno, en la provincia de Sevilla, y ha suscitado diversas interpretaciones: desde un registro de sucesos hasta un proto-sistema de escritura. Ante la ausencia de un corpus comparativo amplio, este estudio se centra en analizar la distribución de las marcas para:
+
+1. Verificar si la distribución sigue patrones no aleatorios.  
+2. Determinar si la orientación de lectura influye en la estructura detectada.  
+3. Explorar posibles correlaciones con patrones astronómicos o registros de fenómenos temporales.
 
 ---
 
 ## Metodología
 
-### Transcripción y Codificación de Datos
+### 1. Transcripción y Codificación de Datos
 
-Se identificaron inicialmente múltiples categorías en las marcas:
+Inicialmente se identificaron múltiples categorías en las marcas (1, 1.5, 2, 3, 3.5, 4 y 5). Para el análisis se simplificó el sistema a un modelo de tres estados:
 
-- **1:** Raya vertical  
-- **1.5:** Raya ligeramente inclinada hacia la derecha  
-- **2:** Raya inclinada a aproximadamente 45º hacia la derecha  
-- **3:** Raya horizontal  
-- **3.5:** Raya ligeramente inclinada hacia la izquierda  
-- **4:** Raya inclinada a aproximadamente 45º hacia la izquierda  
-- **5:** Vacío
+- **1:** Trazos "verticales" (valores originales menores a 2.5, excluyendo los vacíos).  
+- **3:** Trazos "horizontales" (valores originales mayores o iguales a 2.5, excluyendo los vacíos).  
+- **5:** Casillas en blanco o vacías.
 
-Tras los análisis preliminares se comprobó que la variabilidad se reduce a una distinción fundamental:
+A continuación se muestra un ejemplo del DataFrame original (orientación horizontal) antes de la transformación:
 
-- **Vertical:** asignación numérica 1 (valores menores a un umbral, por ejemplo, < 2.5)
-- **Horizontal:** asignación numérica 3 (valores ≥ 2.5)
+![DataFrame original (orientación horizontal)](/data/dataframe_original_horizontal.png)
 
-Esta transformación a un modelo “binario” (conservando los vacíos representados por el 5) simplifica la interpretación y permite detectar patrones estructurales.
+### 2. Análisis Estadísticos y de IA Aplicados
 
-> **Ejemplo del DataFrame original (orientación horizontal):**  
-> ![DataFrame original (horizontal)](https://github.com/runciter2078/AnalisisTabletaCerroMacareno/blob/main/data/dataframe_original_horizontal.png?raw=true)
+#### 2.1 Autocorrelación Espacial
 
-### Análisis Estadísticos y de IA Aplicados
+Se evaluó la estructura espacial calculando:
 
-#### 1. Autocorrelación Espacial
+- **Sumas por filas y columnas:** Permiten detectar concentraciones de trazos verticales u horizontales.
+- **Promedio de vecinos (vecindad de Moore):** Para cada celda se calcula el promedio de sus 8 vecinos en una vecindad 3×3.
+- **Coeficiente de correlación de Pearson:**  
+  \[
+  r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2 \sum (y_i - \bar{y})^2}}
+  \]
+  donde \(x_i\) es el valor de la celda y \(y_i\) el promedio de sus vecinos. Un \(r\) moderado o alto indica que celdas con valores similares tienden a agruparse.
 
-Se evaluó la estructura espacial mediante:
-- **Sumas por filas y columnas:** que actúan como indicadores de la distribución de estados.
-- **Promedio de vecinos (vecindad de Moore):** para cada celda se calcula el promedio de sus 8 vecinos.
-- **Coeficiente de correlación de Pearson:**
+#### 2.2 Transformada de Fourier (FFT)
 
-\[
-r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2 \sum (y_i - \bar{y})^2}}
-\]
-
-donde \(x_i\) es el valor de la celda y \(y_i\) el promedio de sus vecinos. Los análisis arrojaron un coeficiente moderado, indicando que la distribución no es aleatoria.
-
-#### 2. Transformada de Fourier (FFT)
-
-La FFT se utilizó para detectar periodicidades en las sumas por filas y columnas. Se define como:
+La FFT se aplicó a las sumas por filas y columnas para detectar periodicidades en la distribución. La transformada se define como:
 
 \[
-X(k) = \sum_{n=0}^{N-1} x(n)\,e^{-i\,2\pi\frac{k\,n}{N}}
+X(k)=\sum_{n=0}^{N-1}x(n)\,e^{-i\,2\pi\frac{k\,n}{N}}
 \]
 
-Esta herramienta permite identificar posibles ciclos o patrones repetitivos que, en una hipótesis astronómica, podrían relacionarse con ciclos temporales (por ejemplo, lunar o solar). Aunque se graficaron los espectros, no se detectaron picos de periodicidad claramente marcados.
+Esta técnica permite identificar posibles ciclos o patrones repetitivos, que en una hipótesis astronómica podrían relacionarse con fenómenos cíclicos.
 
-#### 3. Reducción de Dimensionalidad: PCA y t-SNE
+#### 2.3 Reducción de Dimensionalidad: PCA y t-SNE
 
 - **PCA (Análisis de Componentes Principales):**  
-  Se emplea para reducir la dimensionalidad del conjunto de datos y extraer las direcciones de mayor varianza. El método transforma el conjunto de datos \(X\) en un conjunto de componentes \(Z\) utilizando la matriz de covarianza.
-
+  Se emplea para reducir la dimensionalidad del conjunto de datos y extraer las direcciones de mayor varianza.
+  
 - **t-SNE:**  
-  Técnica no lineal que permite visualizar agrupamientos latentes en datos de alta dimensión. Dada la limitada cantidad de muestras (por ejemplo, 8 filas), se ajustaron parámetros como el _perplexity_ para obtener visualizaciones coherentes.
+  Técnica no lineal que permite visualizar agrupamientos latentes en datos de alta dimensión. Se ajustaron parámetros (por ejemplo, el _perplexity_) para obtener visualizaciones coherentes, especialmente en muestras pequeñas.
 
-Ambas técnicas evidenciaron agrupaciones latentes en la distribución de los estados, lo que respalda la robustez estructural de la Tableta.
+#### 2.4 Clustering Difuso (Fuzzy C-means)
 
-#### 4. Clustering Difuso: Fuzzy C-means
-
-El clustering difuso permite asignar a cada celda grados de pertenencia a distintos clusters. El algoritmo Fuzzy C-means minimiza la función objetivo:
+El algoritmo Fuzzy C-means permite que cada celda tenga un grado de pertenencia a cada clúster. El método minimiza la siguiente función objetivo:
 
 \[
-J_m = \sum_{i=1}^{N} \sum_{j=1}^{C} u_{ij}^m \| x_i - c_j \|^2
+J_m=\sum_{i=1}^{N}\sum_{j=1}^{C}u_{ij}^m \, \|x_i-c_j\|^2
 \]
 
-donde \(u_{ij}\) es el grado de pertenencia de la muestra \(x_i\) al cluster \(j\), \(c_j\) es el centro del cluster, y \(m\) es el coeficiente de fuzzificación. El Fuzzy Partition Coefficient (FPC) se utiliza para evaluar la calidad de la partición; valores cercanos a 1 indican una partición nítida. En el análisis se obtuvo un FPC de aproximadamente 0.70 para \(k=2\), lo que sugiere una división robusta en dos bloques.
+donde:
+- \(u_{ij}\) es el grado de pertenencia de la muestra \(x_i\) al clúster \(j\),
+- \(c_j\) es el centro del clúster,
+- \(m\) es el coeficiente de fuzzificación.
 
-#### 5. (Opcional) Transformación PCA Básica
+Se utiliza el Fuzzy Partition Coefficient (FPC) para evaluar la calidad de la partición, siendo valores cercanos a 1 indicativos de una partición nítida.
 
-Para una representación simplificada de la transformación PCA se puede usar:
+#### 2.5 Orientación Horizontal vs. Orientación Vertical
 
-\[
-Z = XW
-\]
+Para evaluar si la orientación de lectura altera los resultados, se repitieron los análisis en:
+- **Orientación Horizontal:** Matriz en su forma original.  
+- **Orientación Vertical:** Matriz traspuesta (lo que equivale a "rotar" la tablilla 90º).
 
-donde \(W\) son los vectores propios de la matriz de covarianza de \(X\).
-
-#### 6. Orientación de Lectura
-
-Se realizaron los análisis tanto en la orientación **horizontal** (tal como se transcribió originalmente) como en la orientación **vertical** (tras transponer la matriz). Esto permite evaluar si la dirección de lectura afecta la interpretación de la estructura.
+Se mantuvieron los mismos códigos (1 para "vertical", 3 para "horizontal" y 5 para "vacío") para facilitar la comparación.
 
 ---
 
 ## Resultados
 
-### Orientación Horizontal
+### 3.1 Orientación Horizontal
 
-- **Sumas por Filas y Columnas:**  
-  Las sumas varían en cada fila y columna, lo que sugiere la existencia de bloques diferenciados.
+1. **Estadísticas Descriptivas (excluyendo vacíos):**  
+   - Media: ~2.39  
+   - Mediana: 3.00  
+   - Desviación estándar: ~1.10  
+   
+   Estos valores, junto con el histograma de frecuencias, sugieren dos agrupaciones (valores próximos a 1 y valores cercanos a 3).
 
-- **Autocorrelación Espacial:**  
-  Se obtuvo un coeficiente de correlación de Pearson moderado, lo que indica que celdas con valores similares tienden a agruparse.
+2. **Autocorrelación y FFT:**  
+   - Se detectan diferencias en las sumas por filas y columnas, lo que indica bloques diferenciados.  
+   - La FFT no muestra picos de periodicidad astronómica claramente definidos, pero revela patrones de distribución.
+   
+   ![Espectro FFT de filas (Horizontal)](/data/fft_filas_horizontal.png)
+   ![Espectro FFT de columnas (Horizontal)](/data/fft_columnas_horizontal.png)
 
-- **FFT:**  
-  Los espectros obtenidos no muestran periodicidades marcadas, aunque permiten descartar la presencia de ciclos evidentes.
+3. **Reducción de Dimensionalidad (PCA y t-SNE):**  
+   - **PCA (Horizontal):** Muestra cierta dispersión con indicios de dos agrupaciones, aunque no tan definidas.  
+   - **t-SNE (Horizontal):** Evidencia grupos más claros, con algunos puntos intermedios.
+   
+   ![PCA de la tabla (Horizontal)](/data/pca_horizontal.png)
+   ![t-SNE de la tabla (Horizontal)](/data/tsne_horizontal.png)
 
-- **Reducción de Dimensionalidad (PCA y t-SNE):**  
-  - La PCA muestra indicios de dos agrupaciones, aunque la separación no es muy nítida.  
-  - El t-SNE evidencia agrupamientos más claros, lo que confirma la robustez de la estructura.
+4. **Clustering Difuso (Fuzzy C-means, k=2):**  
+   - Se obtuvo un FPC de aproximadamente 0.65–0.70, lo que sugiere una partición robusta en dos clústeres.
+   
+   ![Clusters (Fuzzy C-means) para k=2 (Horizontal)](/data/fuzzy_horizontal.png)
 
-- **Clustering Difuso:**  
-  Con \(k=2\), el Fuzzy C-means produjo una partición robusta (FPC ≈ 0.70) que sugiere la existencia de dos secciones diferenciadas.
-
-> **Gráficas representativas (Orientación Horizontal):**  
-> - FFT de filas y columnas  
-> - PCA y t-SNE  
-> - Resultados del clustering difuso  
-> *(Ver imágenes en la carpeta [data](https://github.com/runciter2078/AnalisisTabletaCerroMacareno/tree/main/data))*
-
-### Orientación Vertical
-
-Para simular la lectura vertical se transpusó la matriz (intercambiando filas y columnas). Se aplicaron los mismos análisis:
-
-- **Sumas por Filas y Columnas:**  
-  La distribución sigue presentando dos modos, similar a la orientación horizontal.
-
-- **Autocorrelación Espacial y FFT:**  
-  Los cálculos de sumas y la FFT muestran resultados comparables a la orientación horizontal; es decir, sin picos de periodicidad claramente marcados, pero confirmando patrones de distribución.
-
-- **Reducción de Dimensionalidad (PCA y t-SNE):**  
-  - La PCA indica dos tendencias principales, aunque la separación es menos pronunciada en algunos casos.  
-  - El t-SNE en orientación vertical en ocasiones revela una agrupación casi perfecta en dos bloques, lo que podría sugerir que la lectura vertical resalta de forma más clara la segmentación o bien, ofrece una perspectiva complementaria.
-
-- **Clustering Difuso:**  
-  El Fuzzy C-means para \(k=2\) produjo un FPC similar (≈ 0.70), confirmando la robustez de la partición en ambas orientaciones.
-
-> **Gráficas representativas (Orientación Vertical):**  
-> - FFT de filas y columnas  
-> - PCA y t-SNE  
-> - Resultados del clustering difuso  
-> *(Ver imágenes en la carpeta [data](https://github.com/runciter2078/AnalisisTabletaCerroMacareno/tree/main/data))*
+**Conclusiones de la Orientación Horizontal:**  
+Los datos se agrupan en dos bloques diferenciados (1 y 3) de forma consistente, validando la propuesta de un modelo "binario" (más el estado 5 para los vacíos). Aunque la FFT no muestra periodicidades astronómicas evidentes, la presencia de patrones espaciales y la robustez del clustering refuerzan la hipótesis de una estructura intencional.
 
 ---
 
-## Conclusiones
+### 3.2 Orientación Vertical
 
-Los análisis realizados indican que la Tableta de Cerro Macareno presenta una organización no aleatoria, con bloques diferenciados que se mantienen consistentes en ambas orientaciones (horizontal y vertical). La transformación a un modelo que conserva tres estados (1 = vertical, 3 = horizontal, 5 = vacío) simplifica la interpretación, mostrando que las marcas se agrupan fundamentalmente en estos estados.
+Para simular la lectura "vertical" de la tablilla se transpuso la matriz. Esto implica que las filas y columnas intercambian rol, lo que a veces invierte la interpretación de "vertical" y "horizontal", pero se mantienen los mismos códigos (1, 3 y 5).
 
-- **Orientación Horizontal:**  
-  Los métodos de autocorrelación, FFT, PCA, t-SNE y clustering difuso evidencian la existencia de dos agrupaciones principales. Aunque la FFT no reveló periodicidades marcadas, los patrones espaciales y la robustez del clustering respaldan la hipótesis de una estructura intencional.
+1. **Estadísticas Descriptivas (excluyendo vacíos):**  
+   Se observa que la distribución sigue mostrando dos modos, similar a la orientación horizontal.
 
-- **Orientación Vertical:**  
-  Los resultados son comparables a los obtenidos en orientación horizontal. En particular, el t-SNE en ciertos ensayos mostró una separación casi perfecta en dos bloques, lo que podría indicar que la lectura vertical resalta de forma más clara la segmentación o, al menos, aporta una visión complementaria. En cualquier caso, ambos enfoques confirman la solidez de la estructura subyacente.
+2. **Autocorrelación y FFT (Vertical):**  
+   - Se repiten los cálculos de sumas por filas y columnas y se aplica la FFT.  
+   - Los resultados son similares: no se aprecian picos claros de periodicidad, pero se confirman patrones de distribución.
+   
+   ![Espectro FFT de filas (Vertical)](/data/fft_filas_vertical.png)
+   ![Espectro FFT de columnas (Vertical)](/data/fft_columnas_vertical.png)
 
-En conjunto, la convergencia de estos distintos enfoques analíticos respalda la transformación a un modelo binario (manteniendo los vacíos) y sugiere que la Tableta podría haber sido utilizada para registrar información espacial o temporal. Esto abre la puerta a futuras investigaciones, incluyendo comparaciones con datos astronómicos y el análisis de otros artefactos arqueológicos.
+3. **Reducción de Dimensionalidad (PCA y t-SNE):**  
+   - **PCA (Vertical):** Muestra dos tendencias, aunque la separación puede variar según la varianza acumulada.
+   - **t-SNE (Vertical):** En algunos casos se observa una agrupación casi perfecta en dos bloques, lo que podría sugerir que la lectura vertical (o la transposición) resalta de forma más clara la segmentación.
+   
+   ![PCA de la tabla (Vertical)](/data/pca_vertical.png)
+   ![t-SNE de la tabla (Vertical)](/data/tsne_vertical.png)
+
+4. **Clustering Difuso (Fuzzy C-means, k=2):**  
+   - El FPC (~0.65) es similar al obtenido en orientación horizontal, confirmando una partición robusta en dos grupos.
+   
+   ![Clusters (Fuzzy C-means) para k=2 (Vertical)](/data/fuzzy_vertical.png)
+
+**Conclusiones de la Orientación Vertical:**  
+Los análisis confirman la persistencia de una estructura bimodal incluso al transponer la matriz. La agrupación casi perfecta en t-SNE en algunos ensayos podría sugerir que la lectura vertical revela una segmentación más clara, o bien, ofrece una visión complementaria a la orientación horizontal. En cualquier caso, los métodos indican que la organización interna de la tablilla es robusta y no depende de la dirección de lectura.
+
+---
+
+## Conclusiones Generales
+
+1. **Validez del Modelo Trinario (1, 3, 5):**  
+   La transformación a un modelo simplificado de tres estados (1 = vertical, 3 = horizontal, 5 = vacío) facilita el análisis y revela una estructura fundamentalmente bimodal.
+
+2. **Orientación Horizontal vs. Vertical:**  
+   - Ambos enfoques arrojan resultados coherentes: la tablilla presenta dos grupos claramente diferenciados.  
+   - En la orientación vertical, algunas técnicas (como t‑SNE) muestran una separación más nítida, lo que podría indicar que la lectura vertical se ajusta mejor a la organización original o, al menos, ofrece una visión complementaria.
+
+3. **Patrones Espaciales y FFT:**  
+   - Aunque no se detectaron periodicidades astronómicas claras, los picos moderados en la FFT y el análisis de autocorrelación evidencian que la distribución de trazos no es aleatoria.
+   - El coeficiente de correlación de Pearson y las sumas por filas y columnas refuerzan la existencia de bloques diferenciados.
+
+4. **Reducción de Dimensionalidad (PCA y t-SNE):**  
+   - La PCA sugiere la existencia de dos direcciones principales de variabilidad.  
+   - El t-SNE evidencia de forma más clara la división en dos grupos, especialmente en la orientación vertical en ciertos ensayos.
+
+5. **Clustering Difuso (Fuzzy C-means):**  
+   - Con \( k=2 \), se obtiene un FPC cercano a 0.65–0.70, indicando una partición estable en dos clústeres.  
+   - Este hallazgo se mantiene en ambas orientaciones, reforzando la hipótesis de una estructura bimodal.
+
+**Perspectivas Futuras:**  
+- Integrar información contextual adicional (por ejemplo, correlaciones con ciclos lunares o solares) para evaluar si la disposición de las marcas responde a motivos astronómicos.  
+- Explorar metodologías avanzadas (como redes neuronales convolucionales) que consideren la distribución espacial completa.  
+- Investigar la posibilidad de más de dos estados relevantes en función de características adicionales de las marcas.
 
 ---
 
 ## Referencias
 
-- **Transformada de Fourier:**  
-  Bracewell, R. N. *The Fourier Transform and Its Applications*.
+- **Bracewell, R. N.** *The Fourier Transform and Its Applications*. McGraw-Hill.  
+- **Jolliffe, I.** *Principal Component Analysis*. Springer.  
+- **van der Maaten, L., & Hinton, G.** (2008). *Visualizing Data using t-SNE*. Journal of Machine Learning Research, 9.  
+- **Bezdek, J. C.** *Pattern Recognition with Fuzzy Objective Function Algorithms*. Springer.  
 
-- **PCA:**  
-  Jolliffe, I. *Principal Component Analysis*.
-
-- **t-SNE:**  
-  van der Maaten, L., & Hinton, G. *Visualizing Data using t-SNE*.
-
-- **Fuzzy C-means:**  
-  Bezdek, J. C. *Pattern Recognition with Fuzzy Objective Function Algorithms*.
+---
