@@ -1,4 +1,4 @@
-# Análisis estadístico y de Inteligencia Artificial de la Tableta de Cerro Macareno
+# Análisis estadístico y de inteligencia artificial de la Tableta de Cerro Macareno
 
 **Autor:** Pablo Beret Grande (abril 2025)  
 
@@ -50,7 +50,7 @@ Inicialmente se identificaron múltiples categorías en las marcas (1, 1.5, 2, 3
 
 A continuación se muestra un ejemplo del DataFrame original (orientación horizontal) antes de la transformación:
 
-![DataFrame original (orientación horizontal)](/data/dataframe_original_horizontal.png)
+![DataFrame original (orientación horizontal)](/data/dataframe_original_horizontal.PNG)
 
 ### 2. Análisis Estadísticos y de IA Aplicados
 
@@ -124,20 +124,20 @@ Se mantuvieron los mismos códigos (1 para "vertical", 3 para "horizontal" y 5 p
    - Se detectan diferencias en las sumas por filas y columnas, lo que indica bloques diferenciados.  
    - La FFT no muestra picos de periodicidad astronómica claramente definidos, pero revela patrones de distribución.
    
-   ![Espectro FFT de filas (Horizontal)](/data/fft_filas_horizontal.png)
-   ![Espectro FFT de columnas (Horizontal)](/data/fft_columnas_horizontal.png)
+   ![Espectro FFT de filas (Horizontal)](/data/fft_filas_horizontal.PNG)
+   ![Espectro FFT de columnas (Horizontal)](/data/fft_columnas_horizontal.PNG)
 
 3. **Reducción de Dimensionalidad (PCA y t-SNE):**  
    - **PCA (Horizontal):** Muestra cierta dispersión con indicios de dos agrupaciones, aunque no tan definidas.  
    - **t-SNE (Horizontal):** Evidencia grupos más claros, con algunos puntos intermedios.
    
-   ![PCA de la tabla (Horizontal)](/data/pca_horizontal.png)
-   ![t-SNE de la tabla (Horizontal)](/data/tsne_horizontal.png)
+   ![PCA de la tabla (Horizontal)](/data/pca_horizontal.PNG)
+   ![t-SNE de la tabla (Horizontal)](/data/tsne_horizontal.PNG)
 
 4. **Clustering Difuso (Fuzzy C-means, k=2):**  
    - Se obtuvo un FPC de aproximadamente 0.65–0.70, lo que sugiere una partición robusta en dos clústeres.
    
-   ![Clusters (Fuzzy C-means) para k=2 (Horizontal)](/data/fuzzy_horizontal.png)
+   ![Clusters (Fuzzy C-means) para k=2 (Horizontal)](/data/fuzzy_horizontal.PNG)
 
 **Conclusiones de la Orientación Horizontal:**  
 Los datos se agrupan en dos bloques diferenciados (1 y 3) de forma consistente, validando la propuesta de un modelo "binario" (más el estado 5 para los vacíos). Aunque la FFT no muestra periodicidades astronómicas evidentes, la presencia de patrones espaciales y la robustez del clustering refuerzan la hipótesis de una estructura intencional.
@@ -155,20 +155,20 @@ Para simular la lectura "vertical" de la tablilla se transpuso la matriz. Esto i
    - Se repiten los cálculos de sumas por filas y columnas y se aplica la FFT.  
    - Los resultados son similares: no se aprecian picos claros de periodicidad, pero se confirman patrones de distribución.
    
-   ![Espectro FFT de filas (Vertical)](/data/fft_filas_vertical.png)
-   ![Espectro FFT de columnas (Vertical)](/data/fft_columnas_vertical.png)
+   ![Espectro FFT de filas (Vertical)](/data/fft_filas_vertical.PNG)
+   ![Espectro FFT de columnas (Vertical)](/data/fft_columnas_vertical.PNG)
 
 3. **Reducción de Dimensionalidad (PCA y t-SNE):**  
    - **PCA (Vertical):** Muestra dos tendencias, aunque la separación puede variar según la varianza acumulada.
    - **t-SNE (Vertical):** En algunos casos se observa una agrupación casi perfecta en dos bloques, lo que podría sugerir que la lectura vertical (o la transposición) resalta de forma más clara la segmentación.
    
-   ![PCA de la tabla (Vertical)](/data/pca_vertical.png)
-   ![t-SNE de la tabla (Vertical)](/data/tsne_vertical.png)
+   ![PCA de la tabla (Vertical)](/data/pca_vertical.PNG)
+   ![t-SNE de la tabla (Vertical)](/data/tsne_vertical.PNG)
 
 4. **Clustering Difuso (Fuzzy C-means, k=2):**  
    - El FPC (~0.65) es similar al obtenido en orientación horizontal, confirmando una partición robusta en dos grupos.
    
-   ![Clusters (Fuzzy C-means) para k=2 (Vertical)](/data/fuzzy_vertical.png)
+   ![Clusters (Fuzzy C-means) para k=2 (Vertical)](/data/fuzzy_vertical.PNG)
 
 **Conclusiones de la Orientación Vertical:**  
 Los análisis confirman la persistencia de una estructura bimodal incluso al transponer la matriz. La agrupación casi perfecta en t-SNE en algunos ensayos podría sugerir que la lectura vertical revela una segmentación más clara, o bien, ofrece una visión complementaria a la orientación horizontal. En cualquier caso, los métodos indican que la organización interna de la tablilla es robusta y no depende de la dirección de lectura.
