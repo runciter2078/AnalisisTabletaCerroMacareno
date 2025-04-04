@@ -4,6 +4,8 @@
 
 ---
 
+![Tableta Cerro Macareno](/data/tablilla.jpg)
+
 ## Resumen
 
 Este estudio analiza la Tableta de Cerro Macareno mediante técnicas estadísticas e inteligencia artificial. Se transcribieron las marcas de la tablilla, originalmente codificadas en múltiples estados, y se simplificaron a un modelo que conserva tres estados: **vertical**, **horizontal** y **vacío**. Se aplicaron métodos de autocorrelación espacial, transformada de Fourier (FFT), reducción de dimensionalidad (PCA y t-SNE) y clustering difuso (Fuzzy C-means) para explorar la estructura subyacente y evaluar la influencia de la orientación de lectura (horizontal vs. vertical).
@@ -20,7 +22,7 @@ This study analyzes the Tableta de Cerro Macareno using statistical and artifici
 
 ---
 
-![Tableta Cerro Macareno](/data/tablilla.jpg)
+![Símbolos en la Tableta Cerro Macareno](/data/tablilla_2.jpg)
 
 ## Introducción
 
