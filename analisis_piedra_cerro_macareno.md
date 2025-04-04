@@ -1,4 +1,4 @@
-# Análisis Estadístico y de IA de la Piedra de Cerro Macareno
+# Análisis estadístico y de Inteligencia Artificial de la Tableta de Cerro Macareno
 
 **Autor:** Pablo Beret Grande (abril 2025)
 
@@ -6,29 +6,29 @@
 
 ## Resumen
 
-Este estudio analiza la Piedra de Cerro Macareno mediante técnicas estadísticas e inteligencia artificial. Se transcribieron las marcas de la tablilla, originalmente codificadas en múltiples estados, y se simplificaron a un modelo que conserva tres estados: vertical, horizontal y vacío. Se aplicaron métodos de autocorrelación espacial, transformada de Fourier (FFT), reducción de dimensionalidad (PCA y t-SNE) y clustering difuso (Fuzzy C-means) para explorar la estructura subyacente y evaluar la influencia de la orientación de lectura.
+Este estudio analiza la Tableta de Cerro Macareno mediante técnicas estadísticas e inteligencia artificial. Se transcribieron las marcas de la tablilla, originalmente codificadas en múltiples estados, y se simplificaron a un modelo que conserva tres estados: vertical, horizontal y vacío. Se aplicaron métodos de autocorrelación espacial, transformada de Fourier (FFT), reducción de dimensionalidad (PCA y t-SNE) y clustering difuso (Fuzzy C-means) para explorar la estructura subyacente y evaluar la influencia de la orientación de lectura.
 
-**Palabras clave:** Piedra de Cerro Macareno, análisis estadístico, inteligencia artificial, autocorrelación espacial, FFT, PCA, t-SNE, clustering difuso, arqueología, patrones astronómicos.
+**Palabras clave:** Tableta de Cerro Macareno, análisis estadístico, inteligencia artificial, autocorrelación espacial, FFT, PCA, t-SNE, clustering difuso, arqueología, patrones astronómicos.
 
 ---
 
 ## Abstract
 
-This study analyzes the Piedra de Cerro Macareno using statistical and artificial intelligence techniques. The tablet markings, originally encoded in multiple states, are simplified to a model that preserves three states: vertical, horizontal, and blank. Spatial autocorrelation, Fourier transform (FFT), dimensionality reduction (PCA and t-SNE), and fuzzy clustering (Fuzzy C-means) methods are applied to explore the underlying structure and assess the impact of reading orientation.
+This study analyzes the Tableta de Cerro Macareno using statistical and artificial intelligence techniques. The tablet markings, originally encoded in multiple states, are simplified to a model that preserves three states: vertical, horizontal, and blank. Spatial autocorrelation, Fourier transform (FFT), dimensionality reduction (PCA and t-SNE), and fuzzy clustering (Fuzzy C-means) methods are applied to explore the underlying structure and assess the impact of reading orientation.
 
-**Key Words:** Piedra de Cerro Macareno, statistical analysis, artificial intelligence, spatial autocorrelation, FFT, PCA, t-SNE, fuzzy clustering, archaeology, astronomical patterns.
+**Key Words:** Tableta de Cerro Macareno, statistical analysis, artificial intelligence, spatial autocorrelation, FFT, PCA, t-SNE, fuzzy clustering, archaeology, astronomical patterns.
 
 ---
 
 ## Introducción
 
-La Piedra de Cerro Macareno es un artefacto arqueológico cuya función y significado han generado múltiples hipótesis. En este estudio se transcribieron las marcas de la tablilla, inicialmente codificadas en varios estados (vertical, horizontal, inclinaciones a la derecha e izquierda, etc.), y se aplicaron técnicas estadísticas y de inteligencia artificial para determinar la estructura subyacente. Los análisis revelaron que, para fines prácticos, el sistema se comporta de forma binaria (vertical vs. horizontal), pero se conserva la categoría de casillas en blanco. Se evaluó además la influencia de la orientación de lectura (horizontal vs. vertical) mediante métodos de correlación espacial, transformada de Fourier (FFT), reducción de dimensionalidad (PCA y t-SNE) y clustering difuso (Fuzzy C-means).
+La Tableta de Cerro Macareno es un artefacto arqueológico cuya función y significado han generado múltiples hipótesis. En este estudio se transcribieron las marcas de la tablilla, inicialmente codificadas en varios estados (vertical, horizontal, inclinaciones a la derecha e izquierda, etc.), y se aplicaron técnicas estadísticas y de inteligencia artificial para determinar la estructura subyacente. Los análisis revelaron que, para fines prácticos, el sistema se comporta de forma binaria (vertical vs. horizontal), pero se conserva la categoría de casillas en blanco. Se evaluó además la influencia de la orientación de lectura (horizontal vs. vertical) mediante métodos de correlación espacial, transformada de Fourier (FFT), reducción de dimensionalidad (PCA y t-SNE) y clustering difuso (Fuzzy C-means).
 
 ---
 
 ## Historia y Contexto
 
-La piedra fue hallada en el yacimiento del Cerro Macareno, en la provincia de Sevilla, y forma parte de los objetos arqueológicos que han suscitado debate sobre su función. Diversas interpretaciones han sugerido que podría tratarse de un registro de sucesos, un inventario o incluso un proto-sistema de escritura. Ante la falta de un corpus comparativo amplio, se ha optado por analizar la distribución de las marcas en la pieza para evaluar si existe una organización intencional y, potencialmente, si se asocia a patrones de origen astronómico o a registros de fenómenos temporales o espaciales.
+La Tableta fue hallada en el yacimiento del Cerro Macareno, en la provincia de Sevilla, y forma parte de los objetos arqueológicos que han suscitado debate sobre su función. Diversas interpretaciones han sugerido que podría tratarse de un registro de sucesos, un inventario o incluso un proto-sistema de escritura. Ante la falta de un corpus comparativo amplio, se ha optado por analizar la distribución de las marcas en la pieza para evaluar si existe una organización intencional y, potencialmente, si se asocia a patrones de origen astronómico o a registros de fenómenos temporales o espaciales.
 
 ---
 
@@ -79,7 +79,7 @@ Esta herramienta permite identificar posibles ciclos o patrones repetitivos que,
 - **t-SNE:**  
   Técnica no lineal de reducción de dimensionalidad que permite visualizar agrupamientos latentes en datos de alta dimensión. Dada la escasez de muestras (por ejemplo, 8 filas), se ajustaron parámetros como el _perplexity_ para obtener visualizaciones coherentes.
 
-Ambas técnicas han evidenciado agrupaciones latentes en la distribución de los estados, lo que respalda la robustez estructural de la piedra.
+Ambas técnicas han evidenciado agrupaciones latentes en la distribución de los estados, lo que respalda la robustez estructural de la Tableta.
 
 #### 4. Clustering Difuso: Fuzzy C-means
 
@@ -99,7 +99,7 @@ donde *W* son los vectores propios de la matriz de covarianza de *X*.
 
 ### Orientación de Lectura
 
-Se realizaron los análisis tanto en la orientación horizontal (como se transcribió originalmente) como en la orientación vertical (tras transponer la matriz). Los resultados en ambas orientaciones fueron consistentes, indicando que la estructura subyacente de la piedra es robusta y no depende de la dirección de lectura.
+Se realizaron los análisis tanto en la orientación horizontal (como se transcribió originalmente) como en la orientación vertical (tras transponer la matriz). Los resultados en ambas orientaciones fueron consistentes, indicando que la estructura subyacente de la Tableta es robusta y no depende de la dirección de lectura.
 
 ---
 
@@ -124,7 +124,7 @@ Se realizaron los análisis tanto en la orientación horizontal (como se transcr
 
 ## Conclusiones
 
-Los análisis realizados indican que la Piedra de Cerro Macareno presenta una organización no aleatoria, con bloques diferenciados que se mantienen consistentes en ambas orientaciones (horizontal y vertical). La transformación a un modelo que conserva tres estados (1 = vertical, 3 = horizontal, 5 = vacío) simplifica la interpretación, mostrando que las marcas se agrupan fundamentalmente en estos estados. Esta partición robusta, evidenciada mediante autocorrelación espacial, técnicas de reducción de dimensionalidad y clustering difuso, abre la posibilidad de interpretar estos bloques como registros diferenciados (por ejemplo, presencia versus ausencia de un fenómeno). Aunque no se detectaron periodicidades astronómicas evidentes, la existencia de una estructura ordenada sugiere que la piedra podría haber sido utilizada para registrar información espacial o temporal, lo que invita a futuras comparaciones con datos astronómicos y otros artefactos arqueológicos.
+Los análisis realizados indican que la Tableta de Cerro Macareno presenta una organización no aleatoria, con bloques diferenciados que se mantienen consistentes en ambas orientaciones (horizontal y vertical). La transformación a un modelo que conserva tres estados (1 = vertical, 3 = horizontal, 5 = vacío) simplifica la interpretación, mostrando que las marcas se agrupan fundamentalmente en estos estados. Esta partición robusta, evidenciada mediante autocorrelación espacial, técnicas de reducción de dimensionalidad y clustering difuso, abre la posibilidad de interpretar estos bloques como registros diferenciados (por ejemplo, presencia versus ausencia de un fenómeno). Aunque no se detectaron periodicidades astronómicas evidentes, la existencia de una estructura ordenada sugiere que la Tableta podría haber sido utilizada para registrar información espacial o temporal, lo que invita a futuras comparaciones con datos astronómicos y otros artefactos arqueológicos.
 
 ---
 
