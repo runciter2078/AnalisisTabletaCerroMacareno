@@ -11,7 +11,7 @@ El estudio se basa en la transcripción de las marcas de la tableta, inicialment
 ## Estructura del Repositorio
 
 - `analisis.ipynb`: Cuaderno Jupyter con el código completo del análisis.
-- `documentacion_analisis_tableta_cerro_macareno.md`: Documento con la metodología, teoría, resultados y conclusiones.
+- `analisis_tableta_cerro_macareno.md`: Documento con la metodología, teoría, resultados y conclusiones.
 - `data/`: Carpeta que contiene la imagen de la tablilla (`tablilla.jpg`) y, en el futuro, imágenes de las salidas del cuaderno.
 - `requirements.txt`: Lista de dependencias necesarias (pandas, numpy, matplotlib, seaborn, scikit-learn, scikit-fuzzy, etc.).
 
