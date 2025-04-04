@@ -22,7 +22,7 @@ This study analyzes the Tableta de Cerro Macareno using statistical and artifici
 
 ---
 
-![Símbolos en la Tableta Cerro Macareno](/data/tablilla_2.jpg)
+![Símbolos en la Tableta Cerro Macareno](/data/tablilla_2.png)
 
 ## Introducción
 
