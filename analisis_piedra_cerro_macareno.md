@@ -1,26 +1,48 @@
 # Análisis Estadístico y de IA de la Piedra de Cerro Macareno
 
-Autor: Pablo Beret Grande (abril 2025)
+**Autor:** Pablo Beret Grande (abril 2025)
+
+---
+
+## Resumen
+
+Este estudio analiza la Piedra de Cerro Macareno mediante técnicas estadísticas e inteligencia artificial. Se transcribieron las marcas de la tablilla, originalmente codificadas en múltiples estados, y se simplificaron a un modelo que conserva tres estados: vertical, horizontal y vacío. Se aplicaron métodos de autocorrelación espacial, transformada de Fourier (FFT), reducción de dimensionalidad (PCA y t-SNE) y clustering difuso (Fuzzy C-means) para explorar la estructura subyacente y evaluar la influencia de la orientación de lectura.
+
+**Palabras clave:** Piedra de Cerro Macareno, análisis estadístico, inteligencia artificial, autocorrelación espacial, FFT, PCA, t-SNE, clustering difuso, arqueología, patrones astronómicos.
+
+---
+
+## Abstract
+
+This study analyzes the Piedra de Cerro Macareno using statistical and artificial intelligence techniques. The tablet markings, originally encoded in multiple states, are simplified to a model that preserves three states: vertical, horizontal, and blank. Spatial autocorrelation, Fourier transform (FFT), dimensionality reduction (PCA and t-SNE), and fuzzy clustering (Fuzzy C-means) methods are applied to explore the underlying structure and assess the impact of reading orientation.
+
+**Key Words:** Piedra de Cerro Macareno, statistical analysis, artificial intelligence, spatial autocorrelation, FFT, PCA, t-SNE, fuzzy clustering, archaeology, astronomical patterns.
+
+---
 
 ## Introducción
 
 La Piedra de Cerro Macareno es un artefacto arqueológico cuya función y significado han generado múltiples hipótesis. En este estudio se transcribieron las marcas de la tablilla, inicialmente codificadas en varios estados (vertical, horizontal, inclinaciones a la derecha e izquierda, etc.), y se aplicaron técnicas estadísticas y de inteligencia artificial para determinar la estructura subyacente. Los análisis revelaron que, para fines prácticos, el sistema se comporta de forma binaria (vertical vs. horizontal), pero se conserva la categoría de casillas en blanco. Se evaluó además la influencia de la orientación de lectura (horizontal vs. vertical) mediante métodos de correlación espacial, transformada de Fourier (FFT), reducción de dimensionalidad (PCA y t-SNE) y clustering difuso (Fuzzy C-means).
 
+---
+
 ## Historia y Contexto
 
 La piedra fue hallada en el yacimiento del Cerro Macareno, en la provincia de Sevilla, y forma parte de los objetos arqueológicos que han suscitado debate sobre su función. Diversas interpretaciones han sugerido que podría tratarse de un registro de sucesos, un inventario o incluso un proto-sistema de escritura. Ante la falta de un corpus comparativo amplio, se ha optado por analizar la distribución de las marcas en la pieza para evaluar si existe una organización intencional y, potencialmente, si se asocia a patrones de origen astronómico o a registros de fenómenos temporales o espaciales.
+
+---
 
 ## Metodología
 
 ### Transcripción y Codificación de Datos
 
 Inicialmente se identificaron múltiples categorías en las marcas:
-- **1:** Raya vertical
-- **1.5:** Raya ligeramente inclinada hacia la derecha
-- **2:** Raya inclinada a aproximadamente 45º hacia la derecha
-- **3:** Raya horizontal
-- **3.5:** Raya ligeramente inclinada hacia la izquierda
-- **4:** Raya inclinada a aproximadamente 45º hacia la izquierda
+- **1:** Raya vertical  
+- **1.5:** Raya ligeramente inclinada hacia la derecha  
+- **2:** Raya inclinada a aproximadamente 45º hacia la derecha  
+- **3:** Raya horizontal  
+- **3.5:** Raya ligeramente inclinada hacia la izquierda  
+- **4:** Raya inclinada a aproximadamente 45º hacia la izquierda  
 - **5:** Vacío
 
 Tras los análisis preliminares, se comprobó que la variabilidad se reduce a una distinción fundamental:  
@@ -39,7 +61,7 @@ Para evaluar la estructura espacial se calculan:
 - **Coeficiente de correlación de Pearson:**  
   <img src="https://latex.codecogs.com/svg.image?r=\frac{\sum(x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\sum(x_i-\bar{x})^2\sum(y_i-\bar{y})^2}}" alt="Coeficiente de correlación de Pearson" />
   
-  donde *x<sub>i</sub>* es el valor de la celda y *y<sub>i</sub>* el promedio de sus vecinos. Los análisis arrojaron un coeficiente moderado, indicando que la distribución no es aleatoria.
+  donde *x₍ᵢ₎* es el valor de la celda y *y₍ᵢ₎* el promedio de sus vecinos. Los análisis arrojaron un coeficiente moderado, indicando que la distribución no es aleatoria.
 
 #### 2. Transformada de Fourier (FFT)
 
@@ -65,7 +87,7 @@ El clustering difuso permite que cada celda tenga grados de pertenencia a distin
   
   <img src="https://latex.codecogs.com/svg.image?J_m=\sum_{i=1}^{N}\sum_{j=1}^{C}u_{ij}^m\|x_i-c_j\|^2" alt="Función objetivo del Clustering Difuso (Fuzzy C-means)" />
   
-donde *u<sub>ij</sub>* es el grado de pertenencia de la muestra *x<sub>i</sub>* al cluster *j*, *c<sub>j</sub>* es el centro del cluster y *m* es el coeficiente de fuzzificación. El Fuzzy Partition Coefficient (FPC) se utiliza para evaluar la calidad de la partición; valores cercanos a 1 indican una partición nítida. En el análisis, se obtuvo un FPC de aproximadamente 0.70 para *k=2*, lo que sugiere una división robusta en dos bloques.
+donde *u₍ᵢⱼ₎* es el grado de pertenencia de la muestra *x₍ᵢ₎* al cluster *j*, *c₍ⱼ₎* es el centro del cluster y *m* es el coeficiente de fuzzificación. El Fuzzy Partition Coefficient (FPC) se utiliza para evaluar la calidad de la partición; valores cercanos a 1 indican una partición nítida. En el análisis, se obtuvo un FPC de aproximadamente 0.70 para *k=2*, lo que sugiere una división robusta en dos bloques.
 
 #### 5. (Opcional) Transformación PCA Básica
 
@@ -78,6 +100,8 @@ donde *W* son los vectores propios de la matriz de covarianza de *X*.
 ### Orientación de Lectura
 
 Se realizaron los análisis tanto en la orientación horizontal (como se transcribió originalmente) como en la orientación vertical (tras transponer la matriz). Los resultados en ambas orientaciones fueron consistentes, indicando que la estructura subyacente de la piedra es robusta y no depende de la dirección de lectura.
+
+---
 
 ## Resultados
 
@@ -96,9 +120,13 @@ Se realizaron los análisis tanto en la orientación horizontal (como se transcr
 - **Clustering Difuso:**  
   Con *k=2*, el Fuzzy C-means produjo una partición robusta (FPC ≈ 0.70) que sugiere la existencia de dos secciones diferenciadas, interpretables como la presencia versus la ausencia de un fenómeno registrado.
 
+---
+
 ## Conclusiones
 
 Los análisis realizados indican que la Piedra de Cerro Macareno presenta una organización no aleatoria, con bloques diferenciados que se mantienen consistentes en ambas orientaciones (horizontal y vertical). La transformación a un modelo que conserva tres estados (1 = vertical, 3 = horizontal, 5 = vacío) simplifica la interpretación, mostrando que las marcas se agrupan fundamentalmente en estos estados. Esta partición robusta, evidenciada mediante autocorrelación espacial, técnicas de reducción de dimensionalidad y clustering difuso, abre la posibilidad de interpretar estos bloques como registros diferenciados (por ejemplo, presencia versus ausencia de un fenómeno). Aunque no se detectaron periodicidades astronómicas evidentes, la existencia de una estructura ordenada sugiere que la piedra podría haber sido utilizada para registrar información espacial o temporal, lo que invita a futuras comparaciones con datos astronómicos y otros artefactos arqueológicos.
+
+---
 
 ## Referencias
 
