@@ -20,6 +20,8 @@ This study analyzes the Tableta de Cerro Macareno using statistical and artifici
 
 ---
 
+![Tableta Cerro Macareno](/data/tablilla.jpg)
+
 ## Introducción
 
 La Tableta de Cerro Macareno es un artefacto arqueológico cuya función y significado han generado múltiples hipótesis. En este estudio se transcribieron las marcas de la tablilla, inicialmente codificadas en varios estados (vertical, horizontal, inclinaciones a la derecha e izquierda, etc.), y se aplicaron técnicas estadísticas e inteligencia artificial para determinar la estructura subyacente. Los análisis preliminares revelaron que, para fines prácticos, el sistema se comporta de forma binaria (vertical vs. horizontal), manteniéndose un tercer estado para las casillas en blanco.  
