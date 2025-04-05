@@ -137,7 +137,21 @@ Para evaluar si la orientación de lectura altera los resultados, se repitieron 
 
 ## Conclusiones generales
 
-Los análisis confirman una estructura bimodal robusta independiente de la orientación. Las técnicas de IA y estadística refuerzan la hipótesis de un registro no aleatorio, posiblemente vinculado a fenómenos espaciales o temporales.
+Los análisis realizados confirman de manera sólida la existencia de una **estructura bimodal** en la distribución de marcas de la Tableta de Cerro Macareno, independientemente de la **orientación de lectura** (horizontal o vertical). Esta conclusión se sustenta en la convergencia de múltiples enfoques metodológicos:
+
+- **Transformación a modelo binario**: A partir del análisis estadístico y del clustering (k-means), se identificaron dos agrupaciones dominantes en los datos (valores en torno a 1 y 3), lo que justificó la reducción a un sistema de tres estados: trazos **verticales (1)**, **horizontales (3)** y **vacíos (5)**.
+
+- **Autocorrelación espacial y FFT**: El cálculo de sumas por filas y columnas reveló patrones de concentración de marcas. La **Transformada Rápida de Fourier (FFT)** identificó picos significativos en frecuencias específicas, lo que indica **periodicidades** no aleatorias en la disposición espacial de las marcas.
+
+- **Reducción de dimensionalidad (PCA y t-SNE)**:  
+  - En orientación **horizontal**, el PCA mostró cierta agrupación, aunque sin una separación perfectamente clara, y el t‑SNE evidenció agrupamientos parcialmente superpuestos.  
+  - En orientación **vertical** (matriz traspuesta), el **t‑SNE reveló una separación muy marcada entre los dos grupos**, reforzando la hipótesis bimodal con mayor claridad.
+
+- **Clustering difuso (Fuzzy C-means)**: En ambas orientaciones, el algoritmo arrojó un **Fuzzy Partition Coefficient (FPC)** en torno a 0.65, lo que indica una **segmentación robusta en dos clusters** diferenciados. El heatmap resultante mostró particiones coherentes que validan esta estructura.
+
+En conjunto, estos resultados **descartan la hipótesis de una distribución aleatoria** de los trazos y respaldan la idea de un patrón deliberado en la organización de la tablilla. Aunque **no se identificaron correlaciones astronómicas directas**, la disposición estructurada sugiere que la Tableta podría codificar **información secuencial, espacial o incluso temporal**, posiblemente relacionada con prácticas rituales, registros de eventos o ciclos observacionales.
+
+Este enfoque interdisciplinar, que combina **arqueología, estadística e inteligencia artificial**, permite abordar artefactos como la Tableta de Cerro Macareno desde una nueva perspectiva cuantitativa, sentando las bases para investigaciones futuras orientadas a **descifrar posibles significados simbólicos o funcionales** de estas marcas.
 
 ---
 
