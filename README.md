@@ -25,7 +25,7 @@ El análisis parte de la codificación y conclusiones de **Sáez Uribarri (2006)
 
 ## Resultados principales
 
-### 1. La tableta NO es aleatoria — evidencia fuerte
+### 1. La tableta NO es aleatoria - evidencia fuerte
 
 6 de 7 tests independientes rechazan la hipótesis nula de aleatoriedad tras corrección FDR (Benjamini-Hochberg, α=0.05):
 
